@@ -1,19 +1,28 @@
-@extends('contacts.layout')
+@extends('blogs.layout')
 @section('content')
- 
- 
-<div class="card">
-  <div class="card-header">Contactus Page</div>
-  <div class="card-body">
+    <div class="row">
+        <div class="col-lg-12 margin-tb">
+            <div class="pull-left">
+                <h2> Show blog</h2>
+            </div>
+            <div class="pull-right">
+                <a class="btn btn-primary" href="{{ route('blogs.index') }}"> Back</a>
+            </div>
+        </div>
+    </div>
    
- 
-        <div class="card-body">
-        <h5 class="card-title">Name : {{ $contacts->name }}</h5>
-        <p class="card-text">Address : {{ $contacts->address }}</p>
-        <p class="card-text">Phone : {{ $contacts->mobile }}</p>
-  </div>
-       
-    </hr>
-  
-  </div>
-</div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Title:</strong>
+                {{ $blog->title }}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Description:</strong>
+                {{ $blog->description }}
+            </div>
+        </div>
+    </div>
+@endsection
