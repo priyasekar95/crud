@@ -1,24 +1,49 @@
-@extends('contacts.layout')
-@section('content')
- 
-<div class="card">
-  <div class="card-header">Contactus Page</div>
-  <div class="card-body">
-      
-      <form action="{{ url('contact/' .$contacts->id) }}" method="post">
-        {!! csrf_field() !!}
-        @method("PATCH")
-        <input type="hidden" name="id" id="id" value="{{$contacts->id}}" id="id" />
-        <label>Name</label></br>
-        <input type="text" name="name" id="name" value="{{$contacts->name}}" class="form-control"></br>
-        <label>Address</label></br>
-        <input type="text" name="address" id="address" value="{{$contacts->address}}" class="form-control"></br>
-        <label>Mobile</label></br>
-        <input type="text" name="mobile" id="mobile" value="{{$contacts->mobile}}" class="form-control"></br>
-        <input type="submit" value="Update" class="btn btn-success"></br>
-    </form>
+@extends('blogs.layout')
    
-  </div>
-</div>
- 
-@stop
+@section('content')
+    <div class="row">
+        <div class="col-lg-12 margin-tb">
+            <div class="pull-left">
+                <h2>Edit Blog</h2>
+            </div>
+            <div class="pull-right">
+                <a class="btn btn-primary" href="{{ route('blogs.index') }}"> Back</a>
+            </div>
+        </div>
+    </div>
+   
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <strong>Warning!</strong> Please check input field code<br><br>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+  
+    <form action="{{ route('blogs.update',$blog->id) }}" method="POST">
+        @csrf
+        @method('PUT')
+   
+         <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Title:</strong>
+                    <input type="text" name="title" value="{{ $blog->title }}" class="form-control" placeholder="Title">
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Description:</strong>
+                    <textarea class="form-control" style="height:150px" name="description" placeholder="Description">{{ $blog->description }}</textarea>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+   
+    </form>
+@endsection
